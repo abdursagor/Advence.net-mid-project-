@@ -18,5 +18,10 @@ namespace Project.Controllers
         {
             return View();
         }
+
+        public ActionResult Driver_Details()
+        {
+            return View();
+        }
     }
 }

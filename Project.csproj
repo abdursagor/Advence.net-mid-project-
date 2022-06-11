@@ -109,6 +109,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Surgeon\Index.cshtml" />
     <Content Include="Views\Surgeon\Search.cshtml" />
+    <Content Include="Views\Surgeon\Driver_Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
