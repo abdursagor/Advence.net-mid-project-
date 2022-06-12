@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<main class="grid grid-cols-12 gap-5 mt-5">
+    <section class="col-span-2 bg-[#1e3140] flex flex-col gap-y-2 items-stretch">
+        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5  transition-transform duration-100">
+            Add Driver
+        </a>
+        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
+            Add Police
+        </a>
+        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
+            Update Rules
+        </a>
+        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
+            Update Driver Information
+        </a>
+        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
+            Update Police Information
+        </a>
+    </section>
+    <section class="col-span-8 flex gap-5">
+        <div class="relative w-3/5">
+            <h3>Total Offence in Week</h3>
+            <canvas id="lineChart"></canvas>
+        </div>
+        <div class="relative w-3/5">
+            <h3>Total Offence in Week</h3>
+            <canvas id="radarChart"></canvas>
+        </div>
+    </section>
+    <script src="~/Content/chart.js"></script>
+</main>
+
