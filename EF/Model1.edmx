@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Project_databaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Last_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Phone" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Date_of_birth" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Blood_group" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Father_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Driving_license_number" Type="int" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Date_of_issue" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Validity" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Issuing_authority" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Is_wanted" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Info_offences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Payment_status" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Offences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Offence_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Fine" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Surgeons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Zone" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Model_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Registration_number" Type="int" Nullable="false" />
+          <Property Name="Color" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cc" Type="int" Nullable="false" />
+          <Property Name="Engine_number" Type="int" Nullable="false" />
+          <Property Name="Chasis_number" Type="int" Nullable="false" />
+          <Property Name="Is_rent" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Issuing_authority" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="Registration_date" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Validity" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Seat_number" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varchar" MaxLength="90" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Info_offences_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="Info_offences" Type="Self.Info_offences" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Info_offences">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_offences_Offences">
+          <End Role="Offences" Type="Self.Offences" Multiplicity="1" />
+          <End Role="Info_offences" Type="Self.Info_offences" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Offences">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Info_offences">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_offences_Surgeons">
+          <End Role="Surgeons" Type="Self.Surgeons" Multiplicity="1" />
+          <End Role="Info_offences" Type="Self.Info_offences" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Surgeons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Info_offences">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicles_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_databaseModelStoreContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Info_offences" EntityType="Self.Info_offences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offences" EntityType="Self.Offences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Surgeons" EntityType="Self.Surgeons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Info_offences_Drivers" Association="Self.FK_Info_offences_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Info_offences" EntitySet="Info_offences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_offences_Offences" Association="Self.FK_Info_offences_Offences">
+            <End Role="Offences" EntitySet="Offences" />
+            <End Role="Info_offences" EntitySet="Info_offences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_offences_Surgeons" Association="Self.FK_Info_offences_Surgeons">
+            <End Role="Surgeons" EntitySet="Surgeons" />
+            <End Role="Info_offences" EntitySet="Info_offences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_Drivers" Association="Self.FK_Vehicles_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Project_databaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_of_birth" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Blood_group" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Father_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Driving_license_number" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_of_issue" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Validity" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Issuing_authority" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Is_wanted" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Info_offences" Relationship="Self.FK_Info_offences_Drivers" FromRole="Drivers" ToRole="Info_offences" />
+          <NavigationProperty Name="Vehicle" Relationship="Self.FK_Vehicles_Drivers" FromRole="Drivers" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Info_offences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Payment_status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Info_offences_Drivers" FromRole="Info_offences" ToRole="Drivers" />
+          <NavigationProperty Name="Offence" Relationship="Self.FK_Info_offences_Offences" FromRole="Info_offences" ToRole="Offences" />
+          <NavigationProperty Name="Surgeon" Relationship="Self.FK_Info_offences_Surgeons" FromRole="Info_offences" ToRole="Surgeons" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Offence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Offence_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fine" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Info_offences" Relationship="Self.FK_Info_offences_Offences" FromRole="Offences" ToRole="Info_offences" />
+        </EntityType>
+        <EntityType Name="Surgeon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Info_offences" Relationship="Self.FK_Info_offences_Surgeons" FromRole="Surgeons" ToRole="Info_offences" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Model_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Registration_number" Type="Int32" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cc" Type="Int32" Nullable="false" />
+          <Property Name="Engine_number" Type="Int32" Nullable="false" />
+          <Property Name="Chasis_number" Type="Int32" Nullable="false" />
+          <Property Name="Is_rent" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Issuing_authority" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="Registration_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Validity" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seat_number" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Vehicles_Drivers" FromRole="Vehicles" ToRole="Drivers" />
+        </EntityType>
+        <Association Name="FK_Info_offences_Drivers">
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Info_offences" Type="Self.Info_offences" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Info_offences">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicles_Drivers">
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_offences_Offences">
+          <End Role="Offences" Type="Self.Offence" Multiplicity="1" />
+          <End Role="Info_offences" Type="Self.Info_offences" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Offences">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Info_offences">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_offences_Surgeons">
+          <End Role="Surgeons" Type="Self.Surgeon" Multiplicity="1" />
+          <End Role="Info_offences" Type="Self.Info_offences" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Surgeons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Info_offences">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_databaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="Info_offences" EntityType="Self.Info_offences" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="Offences" EntityType="Self.Offence" />
+          <EntitySet Name="Surgeons" EntityType="Self.Surgeon" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+          <AssociationSet Name="FK_Info_offences_Drivers" Association="Self.FK_Info_offences_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Info_offences" EntitySet="Info_offences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_Drivers" Association="Self.FK_Vehicles_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_offences_Offences" Association="Self.FK_Info_offences_Offences">
+            <End Role="Offences" EntitySet="Offences" />
+            <End Role="Info_offences" EntitySet="Info_offences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_offences_Surgeons" Association="Self.FK_Info_offences_Surgeons">
+            <End Role="Surgeons" EntitySet="Surgeons" />
+            <End Role="Info_offences" EntitySet="Info_offences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Project_databaseModelStoreContainer" CdmEntityContainer="Project_databaseEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="Project_databaseModel.Admin">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="Project_databaseModel.Driver">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="First_name" ColumnName="First_name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Blood_group" ColumnName="Blood_group" />
+                <ScalarProperty Name="Father_name" ColumnName="Father_name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Driving_license_number" ColumnName="Driving_license_number" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Date_of_issue" ColumnName="Date_of_issue" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="Issuing_authority" ColumnName="Issuing_authority" />
+                <ScalarProperty Name="Is_wanted" ColumnName="Is_wanted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Info_offences">
+            <EntityTypeMapping TypeName="Project_databaseModel.Info_offences">
+              <MappingFragment StoreEntitySet="Info_offences">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Payment_status" ColumnName="Payment_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="Project_databaseModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offences">
+            <EntityTypeMapping TypeName="Project_databaseModel.Offence">
+              <MappingFragment StoreEntitySet="Offences">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Offence_name" ColumnName="Offence_name" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surgeons">
+            <EntityTypeMapping TypeName="Project_databaseModel.Surgeon">
+              <MappingFragment StoreEntitySet="Surgeons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="Project_databaseModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Model_name" ColumnName="Model_name" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Registration_number" ColumnName="Registration_number" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Cc" ColumnName="Cc" />
+                <ScalarProperty Name="Engine_number" ColumnName="Engine_number" />
+                <ScalarProperty Name="Chasis_number" ColumnName="Chasis_number" />
+                <ScalarProperty Name="Is_rent" ColumnName="Is_rent" />
+                <ScalarProperty Name="Issuing_authority" ColumnName="Issuing_authority" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="Seat_number" ColumnName="Seat_number" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -5,19 +5,19 @@
 
 <main class="grid grid-cols-12 gap-5 mt-5">
     <section class="col-span-2 bg-[#1e3140] flex flex-col gap-y-2 items-stretch">
-        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5  transition-transform duration-100">
+        <a href="/admin/add_driver" class="py-2 text-center bg-[#1e3140] hover:translate-x-5  transition-transform duration-100">
             Add Driver
         </a>
-        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
+        <a href="/admin/add_surgeon" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
             Add Police
         </a>
         <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
             Update Rules
         </a>
-        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
+        <a href="/admin/driver_list" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
             Update Driver Information
         </a>
-        <a href="#" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
+        <a href="/admin/surgeon_list" class="py-2 text-center bg-[#1e3140] hover:translate-x-5 transition-transform duration-100">
             Update Police Information
         </a>
     </section>
@@ -31,6 +31,92 @@
             <canvas id="radarChart"></canvas>
         </div>
     </section>
-    <script src="~/Content/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script>
+        const ctx = document.getElementById("lineChart").getContext("2d");
+        const myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: ["Saturdat", "Sunday", "Monday", "Wednesday", "Thrusday", "Friday"],
+                datasets: [
+                    {
+                        label: "",
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.2)",
+                            "rgba(54, 162, 235, 0.2)",
+                            "rgba(255, 206, 86, 0.2)",
+                            "rgba(75, 192, 192, 0.2)",
+                            "rgba(153, 102, 255, 0.2)",
+                            "rgba(255, 159, 64, 0.2)",
+                        ],
+                        borderColor: [
+                            "rgba(255, 99, 132, 1)",
+                            "rgba(54, 162, 235, 1)",
+                            "rgba(255, 206, 86, 1)",
+                            "rgba(75, 192, 192, 1)",
+                            "rgba(153, 102, 255, 1)",
+                            "rgba(255, 159, 64, 1)",
+                        ],
+                        tension: 0.2,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+                plugins: {
+                    legend: { display: false },
+                },
+
+            },
+        });
+
+        const Radarctx = document.getElementById("radarChart").getContext("2d");
+        const radar = new Chart(Radarctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Saturdat", "Sunday", "Monday", "Wednesday", "Thrusday", "Friday"],
+                datasets: [
+                    {
+                        label: "",
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.2)",
+                            "rgba(54, 162, 235, 0.2)",
+                            "rgba(255, 206, 86, 0.2)",
+                            "rgba(75, 192, 192, 0.2)",
+                            "rgba(153, 102, 255, 0.2)",
+                            "rgba(255, 159, 64, 0.2)",
+                        ],
+                        borderColor: [
+                            "rgba(255, 99, 132, 1)",
+                            "rgba(54, 162, 235, 1)",
+                            "rgba(255, 206, 86, 1)",
+                            "rgba(75, 192, 192, 1)",
+                            "rgba(153, 102, 255, 1)",
+                            "rgba(255, 159, 64, 1)",
+                        ],
+                        tension: 0.2,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+                plugins: {
+                    legend: { display: false },
+                },
+
+            },
+        });
+
+    </script>
 </main>
 
