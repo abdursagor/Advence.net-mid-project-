@@ -79,5 +79,45 @@ namespace Project.Controllers
             var s = db.Surgeons.Find(id);
             return View(s);
         }
+
+        [HttpGet]
+        public ActionResult Rules()
+        {
+            return View(db.Offences.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Rules(Offence offence)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Offences.Add(offence);
+                db.SaveChanges();
+                return View(db.Offences.ToList());
+            }
+            return View(offence);
+        }
+
+        [HttpPost]
+        public ActionResult Update_Rules(Offence offence,int Id)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = (from o in db.Offences where o.Id == Id select o).SingleOrDefault();
+                data.Offence_name = offence.Offence_name;
+                data.Fine = offence.Fine;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Rules");
+        }
+
+        [HttpPost]
+        public ActionResult Delete_Rules(int Id)
+        {
+            var data = (from o in db.Offences where o.Id == Id select o).SingleOrDefault();
+            db.Offences.Remove(data);
+            db.SaveChanges();
+            return RedirectToAction("Rules");
+        }
     }
 }

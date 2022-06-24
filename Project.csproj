@@ -180,6 +180,7 @@
     <Content Include="Views\Admin\Update_Surgeon.cshtml" />
     <Content Include="Views\Admin\Driver_List.cshtml" />
     <Content Include="Views\Admin\Update_Driver.cshtml" />
+    <Content Include="Views\Admin\Rules.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
