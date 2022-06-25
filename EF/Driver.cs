@@ -26,7 +26,6 @@ namespace Project.EF
         [Required]
         [RegularExpression("([0-9]+)", ErrorMessage = "Phone Number must be 10 Digits Long.")]
         public int Phone { get; set; }
-        [Required]
         public string Photo { get; set; }
         [Required]
         public string Gender { get; set; }
@@ -45,9 +44,7 @@ namespace Project.EF
         public string Category { get; set; }
         [Required]
         public string Date_of_issue { get; set; }
-        [Required]
         public string Validity { get; set; }
-        [Required]
         public string Issuing_authority { get; set; }
         public string Is_wanted { get; set; }
     

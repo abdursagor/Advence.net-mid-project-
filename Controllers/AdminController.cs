@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,10 +24,18 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add_Driver(Driver driver)
+        public ActionResult Add_Driver(Driver driver, HttpPostedFileBase photo)
         {
             if(ModelState.IsValid)
             {
+                string _FileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+                string _path = Path.Combine(Server.MapPath("~/uploads"), _FileName);
+                photo.SaveAs(_path);
+                driver.Photo = _FileName;
+                driver.Validity = DateTime.Now.AddYears(2).ToString();
+                driver.Is_wanted = "false";
+                db.Drivers.Add(driver);
+                db.SaveChanges();
                 return RedirectToAction("Driver_List");
             }
             return View(driver);
@@ -41,9 +50,17 @@ namespace Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult Update_Driver()
+        public ActionResult Update_Driver(int id)
         {
-            return View();
+            var driver = (from d in db.Drivers where d.Id==id select d).SingleOrDefault();
+            return View(driver);
+        }
+
+        [HttpPost]
+        public ActionResult Update_Driver(Driver driver, HttpPostedFileBase photo)
+        {
+            //strat here
+            return View(driver);
         }
 
         [HttpGet]
@@ -78,6 +95,21 @@ namespace Project.Controllers
             //var param = this.Request.Params["skip"];
             var s = db.Surgeons.Find(id);
             return View(s);
+        }
+
+        [HttpPost]
+        public ActionResult Update_Surgeon(Surgeon surgeon,int id)
+        {
+            //var param = this.Request.Params["skip"];
+            if(ModelState.IsValid)
+            {
+                var data = (from s in db.Surgeons where s.Id == id select s).SingleOrDefault();
+                data.Password = surgeon.Password;
+                data.Zone = surgeon.Zone;
+                db.SaveChanges();
+                return RedirectToAction("Surgeon_List");
+            }
+            return View(surgeon);
         }
 
         [HttpGet]

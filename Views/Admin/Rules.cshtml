@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Rules";
+    int count = 1;
 }
 <div id="popup"
      class="absolute inset-0 hidden justify-center items-center bg-offWhite bg-opacity-10 backdrop-blur-sm">
@@ -52,11 +53,12 @@
                 @foreach (var o in Model)
                 {
                     <tr class="table-row">
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">@o.Id</td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">@count</td>
                         <td class="px-6 py-4">@o.Offence_name</td>
                         <td class="px-6 py-4">@o.Fine Tk</td>
                         <td class="px-6 py-4"><button onclick="openEditBox(@o.Id,'@o.Offence_name', @o.Fine)" id="edit" class="btn-primary text-offWhite">Edit</button></td>
                     </tr>
+                    count++;
                 }
 
             </tbody>

@@ -12,12 +12,23 @@
                 <h3 class="text-center text-3xl">Update Driver Information</h3>
             </div>
 
+            <div class="flex flex-col row-span-2">
+                <label for="pp">Profile Picture</label>
+                <img src="~/uploads/@Model.Photo" alt="profile photo" width="100">
+                <input class="text-white"
+                       type="file"
+                       name="photo"
+                       id="photo"
+                       placeholder="Profile Picture" />
+            </div>
+
             <div class="flex flex-col">
                 <label for="fn">First Name</label>
                 <input class="rounded-input"
                        type="text"
                        name="first_name"
                        id="first_name"
+                       value="@Model.First_name"
                        placeholder="First Name" />
             </div>
 
@@ -27,6 +38,7 @@
                        type="text"
                        name="last_name"
                        id="last_name"
+                       value="@Model.Last_name"
                        placeholder="Full Name" />
             </div>
 
@@ -36,6 +48,7 @@
                        type="text"
                        name="email"
                        id="email"
+                       value="@Model.Email"
                        placeholder="E-mail" />
             </div>
 
@@ -43,27 +56,19 @@
                 <label for="pnumber">Phone Number</label>
                 <input class="rounded-input"
                        type="text"
-                       name="pnumber"
-                       id="pnumber"
+                       name="phone"
+                       id="phone"
+                       value="@Model.Phone"
                        placeholder="Phone Number" />
-            </div>
-
-            <div class="flex flex-col">
-                <label for="pp">Profile Picture</label>
-                <input class="text-white"
-                       type="file"
-                       name="photo"
-                       id="photo"
-                       placeholder="Profile Picture" />
             </div>
 
             <div class="flex flex-col">
                 <label for="gender">Gender</label>
                 <div class="flex gap-2 items-center">
                     <label for="male">Male</label>
-                    <input type="radio" id="female" name="gender" value="Male" />
+                    <input type="radio" id="female" name="gender" value="Male" @(Model.Gender == "Male" ? "checked" : "") />
                     <label for="female">Female</label>
-                    <input type="radio" id="other" name="gender" value="Female" />
+                    <input type="radio" id="other" name="gender" value="Female" @(Model.Gender == "Female" ? "checked" : "") />
                 </div>
             </div>
 
@@ -71,7 +76,8 @@
                 <label for="dob">Date of birth</label>
                 <input class="rounded-input"
                        type="date"
-                       name="dob"
+                       name="Date_of_birth"
+                       value="@Model.Date_of_birth"
                        id="dob"
                        placeholder="Date of birth" />
             </div>
@@ -82,21 +88,22 @@
                        type="text"
                        name="age"
                        id="age"
+                       value="@Model.Age"
                        placeholder="Age" />
             </div>
 
             <div class="flex flex-col">
-                <label for="bloodG">Blood Group</label>
-                <select name="bloodG" id="bloodG" class="text-dark">
+                <label for="Blood_group">Blood Group</label>
+                <select name="Blood_group" id="bloodG" class="text-dark">
                     <option value="">Please choose an option</option>
-                    <option value="A+">A+</option>
-                    <option value="O+">O+</option>
-                    <option value="B+">B+</option>
-                    <option value="AB+">AB+</option>
-                    <option value="A-">A-</option>
-                    <option value="O-">O-</option>
-                    <option value="B-">B-</option>
-                    <option value="AB-">AB-</option>
+                    <option value="A+" @(Model.Blood_group == "A+" ? "selected" : "")>A+</option>
+                    <option value="O+" @(Model.Blood_group == "O+" ? "selected" : "")>O+</option>
+                    <option value="B+" @(Model.Blood_group == "B+" ? "selected" : "")>B+</option>
+                    <option value="AB+" @(Model.Blood_group == "AB+" ? "selected" : "")>AB+</option>
+                    <option value="A-" @(Model.Blood_group == "A-" ? "selected" : "")>A-</option>
+                    <option value="O-" @(Model.Blood_group == "O-" ? "selected" : "")>O-</option>
+                    <option value="B-" @(Model.Blood_group == "B-" ? "selected" : "")>B-</option>
+                    <option value="AB-" @(Model.Blood_group == "AB-" ? "selected" : "")>AB-</option>
                 </select>
             </div>
 
@@ -104,8 +111,9 @@
                 <label for="fathersN">Father / Husband Name</label>
                 <input class="rounded-input"
                        type="text"
-                       name="fathersN"
-                       id="fathersN"
+                       name="Father_name"
+                       id="Father_name"
+                       value="@Model.Father_name"
                        placeholder="Father / Husband Name" />
             </div>
 
@@ -115,6 +123,7 @@
                        type="text"
                        name="address"
                        id="address"
+                       value="@Model.Address"
                        placeholder="Address" />
             </div>
 
@@ -122,17 +131,18 @@
                 <label for="dln">Driving License No.</label>
                 <input class="rounded-input"
                        type="text"
-                       name="dln"
-                       id="dln"
+                       name="Driving_license_number"
+                       id="Driving_license_number"
+                       value="@Model.Driving_license_number"
                        placeholder="Driving License Number" />
             </div>
 
             <div class="flex flex-col">
-                <label for="bloodG">Category</label>
-                <select name="category" id="category" class="text-dark">
+                <label for="Category">Category</label>
+                <select name="Category" id="category" class="text-dark">
                     <option value="">Please choose an option</option>
-                    <option value="Professional">Professional</option>
-                    <option value="Non-Professional">Non-Professional</option>
+                    <option value="Professional" @(Model.Category == "Professional" ? "selected" : "")>Professional</option>
+                    <option value="Non-Professional" @(Model.Category == "Non-Professional" ? "selected" : "")>Non-Professional</option>
                 </select>
             </div>
 
@@ -140,8 +150,9 @@
                 <label for="doi">Date of issue</label>
                 <input class="rounded-input"
                        type="date"
-                       name="doi"
-                       id="doi"
+                       name="Date_of_issue"
+                       id="Date_of_issue"
+                       value="@Model.Date_of_issue"
                        placeholder="Date of issue" />
             </div>
 
@@ -149,8 +160,9 @@
                 <label for="issueA">Issuing Authority</label>
                 <input class="rounded-input"
                        type="text"
-                       name="issueA"
-                       id="issueA"
+                       name="Issuing_authority"
+                       id="Issuing_authority"
+                       value="@Model.Issuing_authority"
                        placeholder="Issuing Authority" />
             </div>
             <br />

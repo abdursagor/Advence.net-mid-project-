@@ -27,11 +27,11 @@
                 {
                     <tr class="table-row">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">@d.Id</td>
-                        <td class="px-6 py-4">Photo</td>
+                        <td class="px-6 py-4"><img src="~/uploads/@d.Photo" width="50" /></td>
                         <td class="px-6 py-4">@d.First_name @d.Last_name</td>
                         <td class="px-6 py-4">@d.Driving_license_number</td>
                         <td class="px-6 py-4">@d.Date_of_issue</td>
-                        <td class="px-6 py-4"><a href="/admin/update_driver/@d.Id"><button class="btn-primary text-white">Update</button></a></td>
+                        <td class="px-6 py-4"><a href="/admin/update_driver/@d.Id" class="btn-primary text-white">Update</a></td>
                     </tr>
                 }
             </tbody>
