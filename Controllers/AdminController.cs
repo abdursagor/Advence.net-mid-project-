@@ -59,7 +59,59 @@ namespace Project.Controllers
         [HttpPost]
         public ActionResult Update_Driver(Driver driver, HttpPostedFileBase photo)
         {
-            //strat here
+            if (ModelState.IsValid)
+            {
+                Driver dr = (from d in db.Drivers where d.Id == driver.Id select d).SingleOrDefault();
+                driver.Date_of_issue = dr.Date_of_issue;
+                dr.First_name = driver.First_name;
+                dr.Last_name = driver.Last_name;
+                dr.Email = driver.Email;
+                dr.Phone = driver.Phone;
+                dr.Gender = driver.Gender;
+                dr.Date_of_birth = driver.Date_of_birth;
+                dr.Age = driver.Age;
+                dr.Blood_group = driver.Blood_group;
+                dr.Father_name = driver.Father_name;
+                dr.Address = driver.Address;
+                dr.Driving_license_number = driver.Driving_license_number;
+                dr.Category = driver.Category;
+                if(driver.Validity!=null)
+                {
+                    dr.Validity = DateTime.Now.AddYears(2).ToString();
+                }
+                dr.Issuing_authority = driver.Issuing_authority;
+                if(driver.Is_wanted==null)
+                {
+                    dr.Is_wanted = "false";
+                }
+                else
+                {
+                    dr.Is_wanted = "true";
+                }
+                if(photo!=null)
+                {
+                    string oldName = dr.Photo.Split('.')[0];
+                    string _FileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/uploads"), _FileName);
+                    photo.SaveAs(_path);
+                    string[] files = Directory.GetFileSystemEntries(Server.MapPath("~/uploads"), $"{oldName}.*");
+                    foreach (string f in files)
+                    {
+                        System.IO.File.Delete(f);
+                    }
+                    dr.Photo = _FileName;
+                }
+                try
+                {
+                    _ = db.SaveChanges();
+                    return RedirectToAction("Driver_List");
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
             return View(driver);
         }
 

@@ -42,7 +42,7 @@ namespace Project.EF
         public int Driving_license_number { get; set; }
         [Required]
         public string Category { get; set; }
-        [Required]
+        //[Required]
         public string Date_of_issue { get; set; }
         public string Validity { get; set; }
         public string Issuing_authority { get; set; }

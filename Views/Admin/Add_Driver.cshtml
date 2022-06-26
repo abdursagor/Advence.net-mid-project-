@@ -54,6 +54,7 @@
             </div>
 
             <div class="flex flex-col">
+                <img id="img" src="~/Content/avatar.jpg" width="50"/>
                 <label for="pp">Profile Picture</label>
                 <input class="text-white"
                        type="file"
@@ -181,6 +182,8 @@
 <script>
     let dob = document.getElementById("dob");
     let age = document.getElementById("age");
+    let imgInp = document.getElementById("photo")
+    let img = document.getElementById("img")
     dob.addEventListener('change', (e) => {
         let date = e.target.value
         let ageDifMs = Date.now() - Date.parse(date);
@@ -189,5 +192,12 @@
         console.log(a)
         age.value = a;
     })
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+            img.src = URL.createObjectURL(file)
+        }
+    }
 </script>
 
