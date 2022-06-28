@@ -50,6 +50,29 @@ namespace Project.Controllers
         }
 
         [HttpGet]
+        public ActionResult Search()
+        {
+            string name = this.Request.Params["name"];
+            string regNumber = this.Request.Params["regNumber"];
+            if(name.Equals(""))
+            {
+                var result = db.Drivers.Where(x => x.Driving_license_number.ToString().Contains(regNumber)).ToList();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else if(regNumber.Equals(""))
+            {
+                var result = db.Drivers.Where(x => x.First_name.Contains(name)).ToList();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var result = db.Drivers.Where(x => x.First_name.Contains(name) || x.Driving_license_number.ToString().Contains(regNumber)).ToList();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+
+        [HttpGet]
         public ActionResult Update_Driver(int id)
         {
             var driver = (from d in db.Drivers where d.Id==id select d).SingleOrDefault();
@@ -136,7 +159,6 @@ namespace Project.Controllers
         [HttpGet]
         public ActionResult Surgeon_List(int id=0)
         {
-            //var param = this.Request.Params["skip"];
             var s = db.Surgeons.ToList().Skip(id*0).Take(10);
             return View(s);
         }
