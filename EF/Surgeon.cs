@@ -11,16 +11,20 @@ namespace Project.EF
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Surgeon
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Surgeon()
+        {
+            this.Offence_info = new HashSet<Offence_info>();
+        }
+    
         public int Id { get; set; }
-        [Required]
         public string Password { get; set; }
-        [Required]
         public string Zone { get; set; }
     
-        public virtual Info_offences Info_offences { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Offence_info> Offence_info { get; set; }
     }
 }

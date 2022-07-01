@@ -61,12 +61,12 @@ namespace Project.Controllers
             }
             else if(regNumber.Equals(""))
             {
-                var result = db.Drivers.Where(x => x.First_name.Contains(name)).ToList();
+                var result = db.Drivers.Where(x => (x.First_name + " " + x.Last_name).Contains(name)).ToList();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                var result = db.Drivers.Where(x => x.First_name.Contains(name) || x.Driving_license_number.ToString().Contains(regNumber)).ToList();
+                var result = db.Drivers.Where(x => (x.First_name + " " + x.Last_name).Contains(name) || x.Driving_license_number.ToString().Contains(regNumber)).ToList();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             

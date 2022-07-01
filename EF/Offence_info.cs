@@ -12,19 +12,17 @@ namespace Project.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Offence
+    public partial class Offence_info
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Offence()
-        {
-            this.Offence_info = new HashSet<Offence_info>();
-        }
-    
         public int Id { get; set; }
-        public string Offence_name { get; set; }
-        public int Fine { get; set; }
+        public Nullable<int> Driver_id { get; set; }
+        public Nullable<int> Surgeon_id { get; set; }
+        public Nullable<int> Offence_id { get; set; }
+        public string Occuring_date { get; set; }
+        public string Payment_status { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Offence_info> Offence_info { get; set; }
+        public virtual Driver Driver { get; set; }
+        public virtual Offence Offence { get; set; }
+        public virtual Surgeon Surgeon { get; set; }
     }
 }

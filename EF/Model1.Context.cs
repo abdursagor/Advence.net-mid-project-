@@ -27,10 +27,11 @@ namespace Project.EF
     
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
-        public virtual DbSet<Info_offences> Info_offences { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Offence> Offences { get; set; }
         public virtual DbSet<Surgeon> Surgeons { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
+        public virtual DbSet<Offence_info> Offence_info { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
