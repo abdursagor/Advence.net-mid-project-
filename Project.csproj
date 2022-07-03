@@ -94,6 +94,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\404.gif" />
+    <Content Include="Content\avatar.jpg" />
+    <Content Include="Content\illegal.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="EF\Model1.Context.tt">
@@ -107,6 +110,8 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="uploads\2a3a3709-e308-4ca9-b60d-6352665ccf08.jpg" />
+    <Content Include="uploads\2a86fa51-4e6c-4a91-82dd-5c07f668256c.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +200,7 @@
     <Content Include="Views\Surgeon\Login.cshtml" />
     <Content Include="Views\Error\Not_Found.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -204,7 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
