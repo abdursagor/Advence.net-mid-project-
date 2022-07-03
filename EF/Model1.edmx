@@ -48,7 +48,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Driver_id" Type="int" />
           <Property Name="Surgeon_id" Type="int" />
           <Property Name="Offence_id" Type="int" />
@@ -101,7 +101,7 @@
           <Property Name="Seat_number" Type="int" Nullable="false" />
           <Property Name="Photo" Type="varchar" MaxLength="90" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Offence_i__Drive__5441852A">
+        <Association Name="FK__Offence_i__Drive__5CD6CB2B">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
           <End Role="Offence_info" Type="Self.Offence_info" Multiplicity="*" />
           <ReferentialConstraint>
@@ -113,7 +113,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Offence_i__Offen__5629CD9C">
+        <Association Name="FK__Offence_i__Offen__5DCAEF64">
           <End Role="Offences" Type="Self.Offences" Multiplicity="0..1" />
           <End Role="Offence_info" Type="Self.Offence_info" Multiplicity="*" />
           <ReferentialConstraint>
@@ -125,7 +125,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Offence_i__Surge__5535A963">
+        <Association Name="FK__Offence_i__Surge__5EBF139D">
           <End Role="Surgeons" Type="Self.Surgeons" Multiplicity="0..1" />
           <End Role="Offence_info" Type="Self.Offence_info" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,15 +158,15 @@
           <EntitySet Name="Surgeons" EntityType="Self.Surgeons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Offence_i__Drive__5441852A" Association="Self.FK__Offence_i__Drive__5441852A">
+          <AssociationSet Name="FK__Offence_i__Drive__5CD6CB2B" Association="Self.FK__Offence_i__Drive__5CD6CB2B">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="Offence_info" EntitySet="Offence_info" />
           </AssociationSet>
-          <AssociationSet Name="FK__Offence_i__Offen__5629CD9C" Association="Self.FK__Offence_i__Offen__5629CD9C">
+          <AssociationSet Name="FK__Offence_i__Offen__5DCAEF64" Association="Self.FK__Offence_i__Offen__5DCAEF64">
             <End Role="Offences" EntitySet="Offences" />
             <End Role="Offence_info" EntitySet="Offence_info" />
           </AssociationSet>
-          <AssociationSet Name="FK__Offence_i__Surge__5535A963" Association="Self.FK__Offence_i__Surge__5535A963">
+          <AssociationSet Name="FK__Offence_i__Surge__5EBF139D" Association="Self.FK__Offence_i__Surge__5EBF139D">
             <End Role="Surgeons" EntitySet="Surgeons" />
             <End Role="Offence_info" EntitySet="Offence_info" />
           </AssociationSet>

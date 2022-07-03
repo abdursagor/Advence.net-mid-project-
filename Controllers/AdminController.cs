@@ -17,7 +17,56 @@ namespace Project.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            int[] count = {0,0,0,0,0,0,0 };
+            int[] category = { 0, 0, 0 };
+            var stat = db.Offence_info.Take(7).ToList();
+
+            foreach (var date in stat)
+            {
+                if (DateTime.Parse(date.Occuring_date).ToShortDateString().Equals(DateTime.Today.ToShortDateString()))
+                {
+                    count[6]++;
+                }
+                else if(DateTime.Parse(date.Occuring_date).ToShortDateString().Equals(DateTime.Today.AddDays(-1).ToShortDateString()))
+                {
+                    count[5]++;
+                }
+                else if (DateTime.Parse(date.Occuring_date).ToShortDateString().Equals(DateTime.Today.AddDays(-2).ToShortDateString()))
+                {
+                    count[4]++;
+                }
+                else if (DateTime.Parse(date.Occuring_date).ToShortDateString().Equals(DateTime.Today.AddDays(-3).ToShortDateString()))
+                {
+                    count[3]++;
+                }
+                else if (DateTime.Parse(date.Occuring_date).ToShortDateString().Equals(DateTime.Today.AddDays(-4).ToShortDateString()))
+                {
+                    count[2]++;
+                }
+                else if (DateTime.Parse(date.Occuring_date).ToShortDateString().Equals(DateTime.Today.AddDays(-5).ToShortDateString()))
+                {
+                    count[1]++;
+                }
+                else if (DateTime.Parse(date.Occuring_date).ToShortDateString().Equals(DateTime.Today.AddDays(-6).ToShortDateString()))
+                {
+                    count[0]++;
+                }
+
+                if(date.Offence.Offence_name.Equals("No Hamlet"))
+                {
+                    category[0]++;
+                }
+                else if(date.Offence.Offence_name.Equals("Test"))
+                {
+                    category[1]++;
+                }
+                else if(date.Offence.Offence_name.Equals("Top Speed"))
+                {
+                    category[2]++;
+                }
+            }
+            var data = (count, category);
+            return View(data);
         }
         [AllowAnonymous]
         public ActionResult Login()

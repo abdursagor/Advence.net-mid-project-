@@ -91,15 +91,10 @@ namespace Project.Controllers
         [HttpPost]
         public ActionResult Add_Offence(Offence offence,int id)
         {
+            int surgeonId = (int)Session["id"];
             Driver driver = (from d in db.Drivers where d.Id == id select d).SingleOrDefault();
-            /*Offence_info newOffence = new Offence_info();
-            newOffence.Offence = offence;
-            newOffence.Payment_status = "false";
-            newOffence.Occuring_date = DateTime.Now.ToString();
-            newOffence.Driver = driver;
-            newOffence.Surgeon = new Surgeon { Id = 20000, Password = "1020304050", Zone = "Farmgate-1" };*/
-            db.Offence_info.Add(new Offence_info { Occuring_date = DateTime.Now.ToString(), Payment_status = "false", Driver = driver, Offence = offence, Surgeon = new Surgeon { Id = 20000, Password = "1020304050", Zone = "Farmgate-1" } });
-            //_ = db.Offence_info.Add(newOffence);
+            Surgeon sugeon = db.Surgeons.Where(s => s.Id == surgeonId).SingleOrDefault();
+            db.Offence_info.Add(new Offence_info { Occuring_date = DateTime.Now.ToString(), Payment_status = "false", Driver = driver, Offence = offence, Surgeon = sugeon });
             _ = db.SaveChanges();
             return RedirectToAction("Search");
         }
@@ -113,7 +108,8 @@ namespace Project.Controllers
         public ActionResult History(int id=0)
         {
             //id need to be dynamic
-            var history = (from oi in db.Offence_info where oi.Surgeon_id == 21002 select oi).ToList();
+            int surgeonID = (int)Session["id"];
+            var history = (from oi in db.Offence_info where oi.Surgeon_id == surgeonID select oi).ToList();
             return View(history);
         }
 
