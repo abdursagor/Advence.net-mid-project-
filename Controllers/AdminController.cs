@@ -138,17 +138,17 @@ namespace Project.Controllers
             string regNumber = this.Request.Params["regNumber"];
             if(name.Equals(""))
             {
-                var result = db.Drivers.Where(x => x.Driving_license_number.ToString().Contains(regNumber)).ToList();
+                var result = db.Drivers.Where(x => x.Driving_license_number.ToString().Contains(regNumber)).Select(x=> new { x.Id, x.Photo, x.First_name, x.Last_name, x.Driving_license_number, x.Date_of_issue}).ToList();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             else if(regNumber.Equals(""))
             {
-                var result = db.Drivers.Where(x => (x.First_name + " " + x.Last_name).Contains(name)).ToList();
+                var result = db.Drivers.Where(x => (x.First_name + " " + x.Last_name).Contains(name)).Select(x => new { x.Id, x.Photo, x.First_name, x.Last_name, x.Driving_license_number, x.Date_of_issue }).ToList();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                var result = db.Drivers.Where(x => (x.First_name + " " + x.Last_name).Contains(name) || x.Driving_license_number.ToString().Contains(regNumber)).ToList();
+                var result = db.Drivers.Where(x => (x.First_name + " " + x.Last_name).Contains(name) || x.Driving_license_number.ToString().Contains(regNumber)).Select(x => new { x.Id, x.Photo, x.First_name, x.Last_name, x.Driving_license_number, x.Date_of_issue }).ToList();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             
