@@ -5,9 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Project.EF;
+using Project.Models;
+using Project.Auth;
 
 namespace Project.Controllers
 {
+    [Authorization("Admin")]
     public class AdminController : Controller
     {
         readonly Project_databaseEntities db = new Project_databaseEntities();
@@ -15,6 +18,36 @@ namespace Project.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Login(LoginModel login)
+        {
+            if(ModelState.IsValid)
+            {
+                var user = (from a in db.Admins where a.Id.ToString() == login.Username select a).SingleOrDefault();
+                if(user == null)
+                {
+                    ViewBag.Message = "Incorrect Username/ID or Password";
+                    return View(login);
+                }
+                else
+                {
+                    Session["role"] = "Admin";
+                    Session["id"] = user.Id;
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return View(login);
+            }
+            
         }
 
         [HttpGet]
@@ -224,6 +257,12 @@ namespace Project.Controllers
             db.Offences.Remove(data);
             db.SaveChanges();
             return RedirectToAction("Rules");
+        }
+
+        public ActionResult Report()
+        {
+            var data = (from n in db.Notifications orderby n.Id descending where n.Level == "Admin" select n).ToList();
+            return View(data);
         }
     }
 }

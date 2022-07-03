@@ -1,4 +1,6 @@
-﻿using Project.EF;
+﻿using Project.Auth;
+using Project.EF;
+using Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Project.Controllers
 {
+    [Authorization("Surgeon")]
     public class SurgeonController : Controller
     {
         readonly Project_databaseEntities db = new Project_databaseEntities();
@@ -14,6 +17,36 @@ namespace Project.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();// remove logout butto
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Login(LoginModel login)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = (from s in db.Surgeons where s.Id.ToString() == login.Username select s).SingleOrDefault();
+                if (user == null)
+                {
+                    ViewBag.Message = "Incorrect Username/ID or Password";
+                    return View(login);
+                }
+                else
+                {
+                    Session["role"] = "Surgeon";
+                    Session["id"] = user.Id;
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return View(login);
+            }
+
         }
 
         public ActionResult Search(int id = 0)
@@ -82,6 +115,31 @@ namespace Project.Controllers
             //id need to be dynamic
             var history = (from oi in db.Offence_info where oi.Surgeon_id == 21002 select oi).ToList();
             return View(history);
+        }
+
+        [HttpGet]
+        public ActionResult Report()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Report(Notification report)
+        {
+            //report.Subject = "Emergency Report";
+            report.Level = "Admin";
+            try
+            {
+                _ = db.Notifications.Add(report);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception _)
+            {
+                ViewBag.ErrMsg = "Something Went Wrong";
+                return View();
+            }
+            
         }
     }
 }

@@ -12,7 +12,7 @@
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    @if (ViewBag.isLoggedin == true)
+    @if (Session["role"] == null)
     {
         <header class="bg-blue flex justify-between items-center h-24 rounded-b-lg px-4">
             <div></div>
@@ -23,9 +23,9 @@
     else
     {
         <header class="bg-blue flex justify-between items-center h-24 rounded-b-lg px-4">
-            <div><a href="/Home" class="btn-primary">Home</a></div>
+            <div><a href="/Home/@Session["role"]" class="btn-primary">Home</a></div>
             <div><h1 class="text-3xl">Smart Trafic Management System</h1></div>
-            <div><button class="btn-primary btn-red">Logout</button></div>
+            <div><a href="/Home/Logout" class="btn-primary btn-red">Logout</a></div>
         </header>
     }
     @RenderBody()
