@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "UpdateDriver";
+}
+
+<h2>
+    <h2>
+        <main class="h-[90vh]">
+            <div class="h-full flex justify-center items-center">
+                <form action="" method="post" class="grid grid-cols-3 gap-5">
+                    <div class="col-span-3">
+                        <h3 class="text-center text-3xl">Update</h3>
+                    </div>
+                   
+                    
+                    <div class="flex flex-col">
+                        <label for="first_name">First name</label>
+                        <input class="rounded-input" type="text" name="first_name" id="first_name" placeholder="First name" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="last_name">Last name</label>
+                        <input class="rounded-input" type="text" name="last_name" id="last_name" placeholder="Last name" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="email">Email</label>
+                        <input class="rounded-input" type="email" name="email" id="email" placeholder="abc@gmail.com" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="phone">Phone Number</label>
+                        <input class="rounded-input" type="number" name="phone" id="phone" placeholder="01-xxxxxxxxx" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="photo">Photo</label>
+                        <input class="rounded-input" type="image" name="photo" id="photo" placeholder="Image" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="gender">Sex</label>
+                        <input class="rounded-input" type="radio" name="gender" id="gender" value="Male" />
+                        <label for="gender">Male</label>
+                        <input class="rounded-input" type="radio" name="gender" id="gender" value="Female" />
+                        <label for="gender">Female</label>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="Date_of_birth">Date of Birth</label>
+                        <input class="rounded-input" type="date" name="Date_of_birth" id="Date_of_birth" placeholder="dd/mm/yyyy" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="age">Age</label>
+                        <input class="rounded-input" type="number" name="age" id="age" placeholder="Age" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="bloodgroup">Blood Group</label>
+                        <input class="rounded-input" type="text" name="bloodgroup" id="bloodgroup" placeholder="Blood Group" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="father_name">Father's name</label>
+                        <input class="rounded-input" type="text" name="father_name" id="father_name" placeholder="Father's Name " />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="address">Address</label>
+                        <input class="rounded-input" type="text" name="address" id="address" placeholder="Address" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="driving_license_number">Driving License Number</label>
+                        <input class="rounded-input" type="text" name="driving_license_number" id="driving_license_number" placeholder="Driving License Number" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="category">Category</label>
+                        <input class="rounded-input" type="radio" name="category" id="category" value="Professional" />
+                        <label for="gender">Professional</label>
+                        <input class="rounded-input" type="radio" name="category" id="category" value="Learner" />
+                        <label for="gender">Learner's</label>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="Date_of_issue">Date of Issue</label>
+                        <input class="rounded-input" type="date" name="Date_of_issue" id="Date_of_issue" placeholder="dd/mm/yyyy" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="validity">Validity</label>
+                        <input class="rounded-input" type="datetime" name="dob" id="dob" placeholder="dd/mm/yyyy 00:00" />
+                    </div>
+                    <div class="mx-auto">
+                        <input class="bg-[#337ec4] px-4 py-2 rounded-2xl hover:bg-[#348fe4] transition-colors duration-200" type="submit" value="Update">
+                    </div>
+                    <div>
+                        <p style="color:red;">@ViewBag.Message</p>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </h2>
+</h2>
+</h2>
+

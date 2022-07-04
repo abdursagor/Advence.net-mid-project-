@@ -2,9 +2,7 @@
 using Project.EF;
 using Project.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Project.Controllers
@@ -66,7 +64,7 @@ namespace Project.Controllers
             }
             else if (regNumber.Equals(""))
             {
-                var result = db.Drivers.Where(x => (x.First_name+" "+ x.Last_name).Contains(name)).Select(x => new { x.Id, x.Photo, x.First_name, x.Last_name, x.Driving_license_number, x.Date_of_issue }).ToList();
+                var result = db.Drivers.Where(x => (x.First_name + " " + x.Last_name).Contains(name)).Select(x => new { x.Id, x.Photo, x.First_name, x.Last_name, x.Driving_license_number, x.Date_of_issue }).ToList();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             else
@@ -89,7 +87,7 @@ namespace Project.Controllers
             return View(data);
         }
         [HttpPost]
-        public ActionResult Add_Offence(Offence offence,int id)
+        public ActionResult Add_Offence(Offence offence, int id)
         {
             int surgeonId = (int)Session["id"];
             Driver driver = (from d in db.Drivers where d.Id == id select d).SingleOrDefault();
@@ -105,7 +103,7 @@ namespace Project.Controllers
             return View(rules);
         }
 
-        public ActionResult History(int id=0)
+        public ActionResult History(int id = 0)
         {
             //id need to be dynamic
             int surgeonID = (int)Session["id"];
@@ -135,7 +133,7 @@ namespace Project.Controllers
                 ViewBag.ErrMsg = "Something Went Wrong";
                 return View();
             }
-            
+
         }
     }
 }

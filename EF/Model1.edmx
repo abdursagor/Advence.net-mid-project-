@@ -34,6 +34,7 @@
           <Property Name="Validity" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Issuing_authority" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Is_wanted" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PASS" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -100,6 +101,7 @@
           <Property Name="Validity" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Seat_number" Type="int" Nullable="false" />
           <Property Name="Photo" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="STAT" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <Association Name="FK__Offence_i__Drive__5CD6CB2B">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
@@ -210,6 +212,7 @@
           <Property Name="Is_wanted" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Vehicle" Relationship="Self.FK_Vehicles_Drivers" FromRole="Drivers" ToRole="Vehicles" />
           <NavigationProperty Name="Offence_info" Relationship="Project_databaseModel.FK__Offence_i__Drive__5441852A" FromRole="Driver" ToRole="Offence_info" />
+          <Property Name="PASS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -258,6 +261,7 @@
           <Property Name="Seat_number" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Driver" Relationship="Self.FK_Vehicles_Drivers" FromRole="Vehicles" ToRole="Drivers" />
+          <Property Name="STAT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Vehicles_Drivers">
           <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
@@ -374,6 +378,7 @@
           <EntitySetMapping Name="Drivers">
             <EntityTypeMapping TypeName="Project_databaseModel.Driver">
               <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="First_name" ColumnName="First_name" />
                 <ScalarProperty Name="Last_name" ColumnName="Last_name" />
@@ -426,6 +431,7 @@
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="Project_databaseModel.Vehicle">
               <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="STAT" ColumnName="STAT" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Model_name" ColumnName="Model_name" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
