@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d9e9dda04481476eb64b8d185d5c6bc1" Name="Diagram1">
-        <EntityTypeShape EntityType="Project_databaseModel.Admin" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_databaseModel.Driver" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_databaseModel.Notification" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+      <Diagram DiagramId="3740373c9fe2465b92ceffbc28b61e5e" Name="Diagram1">
+        <EntityTypeShape EntityType="Project_databaseModel.Admin" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_databaseModel.Driver" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_databaseModel.Notification" Width="1.5" PointX="5.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_databaseModel.Offence_info" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Project_databaseModel.Offence" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Project_databaseModel.Surgeon" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_databaseModel.Vehicle" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_databaseModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_databaseModel.Vehicle" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="Project_databaseModel.FK__Offence_i__Drive__5CD6CB2B" ManuallyRouted="false" />
         <AssociationConnector Association="Project_databaseModel.FK_Vehicles_Drivers" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Project_databaseModel.Offence_info" Width="1.5" PointX="6" PointY="7.75" />
-        <AssociationConnector Association="Project_databaseModel.FK__Offence_i__Drive__5441852A" />
-        <AssociationConnector Association="Project_databaseModel.FK__Offence_i__Offen__5629CD9C" />
-        <AssociationConnector Association="Project_databaseModel.FK__Offence_i__Surge__5535A963" />
-        <EntityTypeShape EntityType="Project_databaseModel.sysdiagram" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="Project_databaseModel.FK__Offence_i__Offen__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_databaseModel.FK__Offence_i__Surge__5EBF139D" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

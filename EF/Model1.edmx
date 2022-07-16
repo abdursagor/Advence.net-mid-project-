@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Project_databaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Project_databaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admins">
           <Key>
             <PropertyRef Name="Id" />
@@ -34,7 +34,7 @@
           <Property Name="Validity" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Issuing_authority" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Is_wanted" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="PASS" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PASS" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -101,7 +101,7 @@
           <Property Name="Validity" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Seat_number" Type="int" Nullable="false" />
           <Property Name="Photo" Type="varchar" MaxLength="90" Nullable="false" />
-          <Property Name="STAT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="STAT" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK__Offence_i__Drive__5CD6CB2B">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
@@ -177,7 +177,8 @@
             <End Role="Vehicles" EntitySet="Vehicles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Project_databaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -210,9 +211,9 @@
           <Property Name="Validity" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Issuing_authority" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Is_wanted" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Offence_info" Relationship="Self.FK__Offence_i__Drive__5CD6CB2B" FromRole="Drivers" ToRole="Offence_info" />
           <NavigationProperty Name="Vehicle" Relationship="Self.FK_Vehicles_Drivers" FromRole="Drivers" ToRole="Vehicles" />
-          <NavigationProperty Name="Offence_info" Relationship="Project_databaseModel.FK__Offence_i__Drive__5441852A" FromRole="Driver" ToRole="Offence_info" />
-          <Property Name="PASS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -223,6 +224,20 @@
           <Property Name="Message" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Level" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+        <EntityType Name="Offence_info">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Driver_id" Type="Int32" />
+          <Property Name="Surgeon_id" Type="Int32" />
+          <Property Name="Offence_id" Type="Int32" />
+          <Property Name="Occuring_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Payment_status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK__Offence_i__Drive__5CD6CB2B" FromRole="Offence_info" ToRole="Drivers" />
+          <NavigationProperty Name="Offence" Relationship="Self.FK__Offence_i__Offen__5DCAEF64" FromRole="Offence_info" ToRole="Offences" />
+          <NavigationProperty Name="Surgeon" Relationship="Self.FK__Offence_i__Surge__5EBF139D" FromRole="Offence_info" ToRole="Surgeons" />
+        </EntityType>
         <EntityType Name="Offence">
           <Key>
             <PropertyRef Name="Id" />
@@ -230,7 +245,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Offence_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Fine" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Offence_info" Relationship="Project_databaseModel.FK__Offence_i__Offen__5629CD9C" FromRole="Offence" ToRole="Offence_info" />
+          <NavigationProperty Name="Offence_info" Relationship="Self.FK__Offence_i__Offen__5DCAEF64" FromRole="Offences" ToRole="Offence_info" />
         </EntityType>
         <EntityType Name="Surgeon">
           <Key>
@@ -239,7 +254,17 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Zone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Offence_info" Relationship="Project_databaseModel.FK__Offence_i__Surge__5535A963" FromRole="Surgeon" ToRole="Offence_info" />
+          <NavigationProperty Name="Offence_info" Relationship="Self.FK__Offence_i__Surge__5EBF139D" FromRole="Surgeons" ToRole="Offence_info" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Vehicle">
           <Key>
@@ -260,9 +285,21 @@
           <Property Name="Validity" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Seat_number" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STAT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Driver" Relationship="Self.FK_Vehicles_Drivers" FromRole="Vehicles" ToRole="Drivers" />
-          <Property Name="STAT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="FK__Offence_i__Drive__5CD6CB2B">
+          <End Role="Drivers" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Offence_info" Type="Self.Offence_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offence_info">
+              <PropertyRef Name="Driver_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Vehicles_Drivers">
           <End Role="Drivers" Type="Self.Driver" Multiplicity="1" />
           <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="0..1" />
@@ -275,63 +312,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Project_databaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admins" EntityType="Self.Admin" />
-          <EntitySet Name="Drivers" EntityType="Self.Driver" />
-          <EntitySet Name="Notifications" EntityType="Self.Notification" />
-          <EntitySet Name="Offences" EntityType="Self.Offence" />
-          <EntitySet Name="Surgeons" EntityType="Self.Surgeon" />
-          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
-          <AssociationSet Name="FK_Vehicles_Drivers" Association="Self.FK_Vehicles_Drivers">
-            <End Role="Drivers" EntitySet="Drivers" />
-            <End Role="Vehicles" EntitySet="Vehicles" />
-          </AssociationSet>
-          <EntitySet Name="Offence_info" EntityType="Project_databaseModel.Offence_info" />
-          <AssociationSet Name="FK__Offence_i__Drive__5441852A" Association="Project_databaseModel.FK__Offence_i__Drive__5441852A">
-            <End Role="Driver" EntitySet="Drivers" />
-            <End Role="Offence_info" EntitySet="Offence_info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Offence_i__Offen__5629CD9C" Association="Project_databaseModel.FK__Offence_i__Offen__5629CD9C">
-            <End Role="Offence" EntitySet="Offences" />
-            <End Role="Offence_info" EntitySet="Offence_info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Offence_i__Surge__5535A963" Association="Project_databaseModel.FK__Offence_i__Surge__5535A963">
-            <End Role="Surgeon" EntitySet="Surgeons" />
-            <End Role="Offence_info" EntitySet="Offence_info" />
-          </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="Project_databaseModel.sysdiagram" />
-        </EntityContainer>
-        <EntityType Name="Offence_info">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Driver_id" Type="Int32" />
-          <Property Name="Surgeon_id" Type="Int32" />
-          <Property Name="Offence_id" Type="Int32" />
-          <Property Name="Occuring_date" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Driver" Relationship="Project_databaseModel.FK__Offence_i__Drive__5441852A" FromRole="Offence_info" ToRole="Driver" />
-          <NavigationProperty Name="Offence" Relationship="Project_databaseModel.FK__Offence_i__Offen__5629CD9C" FromRole="Offence_info" ToRole="Offence" />
-          <NavigationProperty Name="Surgeon" Relationship="Project_databaseModel.FK__Offence_i__Surge__5535A963" FromRole="Offence_info" ToRole="Surgeon" />
-          <Property Name="Payment_status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK__Offence_i__Drive__5441852A">
-          <End Type="Project_databaseModel.Driver" Role="Driver" Multiplicity="0..1" />
-          <End Type="Project_databaseModel.Offence_info" Role="Offence_info" Multiplicity="*" />
+        <Association Name="FK__Offence_i__Offen__5DCAEF64">
+          <End Role="Offences" Type="Self.Offence" Multiplicity="0..1" />
+          <End Role="Offence_info" Type="Self.Offence_info" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Driver">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Offence_info">
-              <PropertyRef Name="Driver_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Offence_i__Offen__5629CD9C">
-          <End Type="Project_databaseModel.Offence" Role="Offence" Multiplicity="0..1" />
-          <End Type="Project_databaseModel.Offence_info" Role="Offence_info" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Offence">
+            <Principal Role="Offences">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Offence_info">
@@ -339,11 +324,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Offence_i__Surge__5535A963">
-          <End Type="Project_databaseModel.Surgeon" Role="Surgeon" Multiplicity="0..1" />
-          <End Type="Project_databaseModel.Offence_info" Role="Offence_info" Multiplicity="*" />
+        <Association Name="FK__Offence_i__Surge__5EBF139D">
+          <End Role="Surgeons" Type="Self.Surgeon" Multiplicity="0..1" />
+          <End Role="Offence_info" Type="Self.Offence_info" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Surgeon">
+            <Principal Role="Surgeons">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Offence_info">
@@ -351,22 +336,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
+        <EntityContainer Name="Project_databaseEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="Offence_info" EntityType="Self.Offence_info" />
+          <EntitySet Name="Offences" EntityType="Self.Offence" />
+          <EntitySet Name="Surgeons" EntityType="Self.Surgeon" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+          <AssociationSet Name="FK__Offence_i__Drive__5CD6CB2B" Association="Self.FK__Offence_i__Drive__5CD6CB2B">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Offence_info" EntitySet="Offence_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_Drivers" Association="Self.FK_Vehicles_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offence_i__Offen__5DCAEF64" Association="Self.FK__Offence_i__Offen__5DCAEF64">
+            <End Role="Offences" EntitySet="Offences" />
+            <End Role="Offence_info" EntitySet="Offence_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offence_i__Surge__5EBF139D" Association="Self.FK__Offence_i__Surge__5EBF139D">
+            <End Role="Surgeons" EntitySet="Surgeons" />
+            <End Role="Offence_info" EntitySet="Offence_info" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Project_databaseModelStoreContainer" CdmEntityContainer="Project_databaseEntities">
+        <EntityContainerMapping StorageEntityContainer="Project_databaseModelStoreContainer" CdmEntityContainer="Project_databaseEntities1">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="Project_databaseModel.Admin">
               <MappingFragment StoreEntitySet="Admins">
@@ -378,7 +379,6 @@
           <EntitySetMapping Name="Drivers">
             <EntityTypeMapping TypeName="Project_databaseModel.Driver">
               <MappingFragment StoreEntitySet="Drivers">
-                <ScalarProperty Name="PASS" ColumnName="PASS" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="First_name" ColumnName="First_name" />
                 <ScalarProperty Name="Last_name" ColumnName="Last_name" />
@@ -397,6 +397,7 @@
                 <ScalarProperty Name="Validity" ColumnName="Validity" />
                 <ScalarProperty Name="Issuing_authority" ColumnName="Issuing_authority" />
                 <ScalarProperty Name="Is_wanted" ColumnName="Is_wanted" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -407,6 +408,18 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Level" ColumnName="Level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offence_info">
+            <EntityTypeMapping TypeName="Project_databaseModel.Offence_info">
+              <MappingFragment StoreEntitySet="Offence_info">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Driver_id" ColumnName="Driver_id" />
+                <ScalarProperty Name="Surgeon_id" ColumnName="Surgeon_id" />
+                <ScalarProperty Name="Offence_id" ColumnName="Offence_id" />
+                <ScalarProperty Name="Occuring_date" ColumnName="Occuring_date" />
+                <ScalarProperty Name="Payment_status" ColumnName="Payment_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -428,10 +441,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Project_databaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="Project_databaseModel.Vehicle">
               <MappingFragment StoreEntitySet="Vehicles">
-                <ScalarProperty Name="STAT" ColumnName="STAT" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Model_name" ColumnName="Model_name" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
@@ -447,29 +470,7 @@
                 <ScalarProperty Name="Validity" ColumnName="Validity" />
                 <ScalarProperty Name="Seat_number" ColumnName="Seat_number" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Offence_info">
-            <EntityTypeMapping TypeName="Project_databaseModel.Offence_info">
-              <MappingFragment StoreEntitySet="Offence_info">
-                <ScalarProperty Name="Payment_status" ColumnName="Payment_status" />
-                <ScalarProperty Name="Occuring_date" ColumnName="Occuring_date" />
-                <ScalarProperty Name="Offence_id" ColumnName="Offence_id" />
-                <ScalarProperty Name="Surgeon_id" ColumnName="Surgeon_id" />
-                <ScalarProperty Name="Driver_id" ColumnName="Driver_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Project_databaseModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="STAT" ColumnName="STAT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

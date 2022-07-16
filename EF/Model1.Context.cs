@@ -13,10 +13,10 @@ namespace Project.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Project_databaseEntities : DbContext
+    public partial class Project_databaseEntities1 : DbContext
     {
-        public Project_databaseEntities()
-            : base("name=Project_databaseEntities")
+        public Project_databaseEntities1()
+            : base("name=Project_databaseEntities1")
         {
         }
     
@@ -28,10 +28,10 @@ namespace Project.EF
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Offence_info> Offence_info { get; set; }
         public virtual DbSet<Offence> Offences { get; set; }
         public virtual DbSet<Surgeon> Surgeons { get; set; }
-        public virtual DbSet<Vehicle> Vehicles { get; set; }
-        public virtual DbSet<Offence_info> Offence_info { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
     }
 }

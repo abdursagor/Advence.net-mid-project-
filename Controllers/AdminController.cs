@@ -13,7 +13,7 @@ namespace Project.Controllers
     [Authorization("Admin")]
     public class AdminController : Controller
     {
-        readonly Project_databaseEntities db = new Project_databaseEntities();
+        readonly Project_databaseEntities1 db = new Project_databaseEntities1();
         // GET: Admin
         public ActionResult Index()
         {

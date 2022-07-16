@@ -10,8 +10,8 @@ namespace Project.Controllers
     [Authorization("Surgeon")]
     public class SurgeonController : Controller
     {
-        readonly Project_databaseEntities db = new Project_databaseEntities();
-        // GET: Surgeon
+        readonly Project_databaseEntities1 db = new Project_databaseEntities1();
+        // GET: Surgeon1
         public ActionResult Index()
         {
             return View();

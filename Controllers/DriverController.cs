@@ -9,7 +9,7 @@ namespace Project.Controllers
 
     public class DriverController : Controller
     {
-        readonly Project_databaseEntities db = new Project_databaseEntities();
+        readonly Project_databaseEntities1 db = new Project_databaseEntities1();
 
         // GET: Driver
         public ActionResult Index()
