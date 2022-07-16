@@ -77,7 +77,7 @@ namespace Project.Controllers
         public ActionResult Driver_Details(int id)
         {
             Driver dr = (from d in db.Drivers where d.Id == id select d).SingleOrDefault();
-            var offence = (from o in db.Offences select o);
+            var offence = (from o in db.Offences select o).ToList();
             var offence_details = (from ol in db.Offence_info where ol.Driver_id == dr.Id select ol).ToList();
             //join o in db.Offences on ol.Offence_id equals o.Id
             //join s in db.Surgeons on ol.Surgeon_id equals s.Id
@@ -94,7 +94,7 @@ namespace Project.Controllers
             Surgeon sugeon = db.Surgeons.Where(s => s.Id == surgeonId).SingleOrDefault();
             db.Offence_info.Add(new Offence_info { Occuring_date = DateTime.Now.ToString(), Payment_status = "false", Driver = driver, Offence = offence, Surgeon = sugeon });
             _ = db.SaveChanges();
-            return RedirectToAction("Search");
+            return RedirectToAction("Driver_Details", new { id = id});
         }
 
         public ActionResult Rules()
