@@ -118,6 +118,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Auth\Authorization.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -201,6 +202,12 @@
     <Content Include="Views\Error\Not_Found.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <Content Include="Views\Driver\Index.cshtml" />
+    <Content Include="Views\Driver\Login.cshtml" />
+    <Content Include="Views\Driver\Rules.cshtml" />
+    <Content Include="Views\Driver\Crime.cshtml" />
+    <Content Include="Views\Driver\UpdateDriver.cshtml" />
+    <Content Include="Views\Driver\Vehciles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

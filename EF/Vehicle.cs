@@ -29,6 +29,7 @@ namespace Project.EF
         public string Validity { get; set; }
         public int Seat_number { get; set; }
         public string Photo { get; set; }
+        public string STAT { get; set; }
     
         public virtual Driver Driver { get; set; }
     }

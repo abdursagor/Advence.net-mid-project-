@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Vehciles";
+}
+<h2>
+    <h2>
+        <main class="h-[90vh]">
+            <div class="h-full flex justify-center items-center">
+                <form action="" method="post" class="grid grid-cols-3 gap-5">
+                    <div class="col-span-3">
+                        <h3 class="text-center text-3xl">Vehciles</h3>
+                    </div>
+
+
+                    <div class="flex flex-col">
+                        <label for="model_name">Model Name</label>
+                        <input class="rounded-input" type="text" name="model_name" id="model_name" placeholder="Model Name" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="category">Category</label>
+                        <input class="rounded-input" type="text" name="category" id="category" placeholder="Category" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="registration_number">Registration Number</label>
+                        <input class="rounded-input" type="text" name="registration_number" id="registration_number" placeholder="Registration Number""/>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="color">Color</label>
+                        <input class="rounded-input" type="text" name="color" id="color" placeholder="Color" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="photo">Photo</label>
+                        <input class="rounded-input" type="image" name="photo" id="photo" placeholder="Image" />
+                    </div>
+                   
+                    <div class="flex flex-col">
+                        <label for="cc">CC</label>
+                        <input class="rounded-input" type="number" name="cc" id="cc" placeholder="CC"/>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="engine_number">Engine Number</label>
+                        <input class="rounded-input" type="number" name="engine_number" id="engine_number" placeholder="Engine Number" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="chasis_number">Chasis Number</label>
+                        <input class="rounded-input" type="text" name="chasis_number" id="chasis_number" placeholder="Chasis Number"/>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="issuing_authority">Issuing authority</label>
+                        <input class="rounded-input" type="text" name="issuing_authority" id="issuing_authority" placeholder="Issuing authority" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="weight">Weight</label>
+                        <input class="rounded-input" type="number" name="weight" id="weight" placeholder="Weight" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="seat_number">No. Of Seat</label>
+                        <input class="rounded-input" type="number" name="seat_number" id="seat_number" placeholder="Seat number" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="is_rent">Rent</label>
+                        <input class="rounded-input" type="radio" name="is_rent" id="is_rent" value="Yes" />
+                        <label for="is_rent">Yes</label>
+                        <input class="rounded-input" type="radio" name="is_rent" id="is_rent" value="No" />
+                        <label for="is_rent">No</label>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="registration_date">Registration Date</label>
+                        <input class="rounded-input" type="date" name="egistration_date" id="egistration_date" placeholder="dd/mm/yyyy" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="validity">Validity</label>
+                        <input class="rounded-input" type="datetime" name="validity" id="validity" placeholder="dd/mm/yyyy 00:00" />
+                    </div>
+                    <div class="mx-auto">
+                        <input class="bg-[#337ec4] px-4 py-2 rounded-2xl hover:bg-[#348fe4] transition-colors duration-200" type="submit" value="Update">
+                    </div>
+                    <div>
+                        <p style="color:red;">@ViewBag.Message</p>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </h2>
+</h2>
+</h2>
+
+

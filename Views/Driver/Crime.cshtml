@@ -1,0 +1,42 @@
+﻿@using Project.EF;
+@model List<Offence_info>
+@{
+    ViewBag.Title = "Crime";
+}
+
+<h2>
+    <main class="p-5">
+        <div class="flex mb-5">
+            <h2 class="text-2xl">Crime List</h2>
+        </div>
+
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 rounded-tl-lg">Driver ID</th>
+                    <th scope="col" class="px-6 py-3">Driver Name</th>
+                    <th scope="col" class="px-6 py-3">Offence Name</th>
+                    <th scope="col" class="px-6 py-3">Fine</th>
+                    <th scope="col" class="px-6 py-3 rounded-tr-lg">Date</th>
+                    <a href="/driver/payment"><div class="card">Payment</div></a>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    <tr class="table-row">
+                        <td scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            @d.Driver_id
+                        </td>
+                        <td class="px-6 py-4">@d.Driver.First_name @d.Driver.Last_name</td>
+                        <td class="px-6 py-4">@d.Offence.Offence_name</td>
+                        <td class="px-6 py-4">@d.Offence.Fine</td>
+                        <td class="px-6 py-4">@d.Occuring_date</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+</h2>
+
