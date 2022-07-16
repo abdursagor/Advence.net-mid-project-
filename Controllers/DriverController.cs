@@ -57,7 +57,7 @@ namespace Project.Controllers
         public ActionResult UpdateDriver(Driver driver)
         {
             int driverId = (int)Session["id"];
-            Driver d = (from db in db.Drivers where db.Id == driver.Id select db).SingleOrDefault();
+            Driver d = (from db in db.Drivers where db.Id == driverId select db).SingleOrDefault();
             d = driver;
             db.SaveChanges();
             return View(driver);
