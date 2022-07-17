@@ -5,8 +5,6 @@ using System.Web.Mvc;
 
 namespace Project.Controllers
 {
-
-
     public class DriverController : Controller
     {
         readonly Project_databaseEntities1 db = new Project_databaseEntities1();
@@ -50,7 +48,9 @@ namespace Project.Controllers
 
         public ActionResult UpdateDriver()
         {
-            return View();
+            int sessionId = (int)Session["id"];
+            var driver = (from d in db.Drivers where d.Id == sessionId select d).SingleOrDefault();
+            return View(driver);
         }
 
         [HttpPost]
